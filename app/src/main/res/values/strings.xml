@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WebView Test</string>
+    <string name="general.ok">OK</string>
+    <string name="tab.settings">Settings/Logs</string>
+    <string name="tab.webview">Web View</string>
+    <string name="general.clear_log">Clear Log</string>
+</resources>

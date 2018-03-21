@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <EditText
+        android:id="@+id/url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/ok_btn"
+        android:inputType="textUri"/>
+
+    <Button
+        android:id="@+id/clear_btn"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginLeft="@dimen/button_margin"
+        android:layout_marginStart="@dimen/button_margin"
+        app:layout_constraintTop_toBottomOf="@id/url"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/textColorPrimary"
+        android:text="@string/general.clear_log" />
+
+    <Button
+        android:id="@+id/ok_btn"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginRight="@dimen/button_margin"
+        android:layout_marginEnd="@dimen/button_margin"
+        app:layout_constraintTop_toBottomOf="@id/url"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/textColorPrimary"
+        android:text="@string/general.ok"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/log_area_margin"
+        app:layout_constraintTop_toBottomOf="@id/ok_btn"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:id="@+id/logs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/navigationBarColor"/>
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

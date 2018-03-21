@@ -1,0 +1,5 @@
+
+bsquid:UselessImportCheck"9Remove this unused import 'android.webkit.WebViewClient'.(Íééê8×ýçÒ¤,
+ksquid:MaximumInheritanceDepth"=This class has 10 parents which is greater than 5 authorized.(²Ú±Ž8×ýçÒ¤,
+œsquid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(±Ë‡*8×ýçÒ¤,
+¢squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¿ÞÄªùÿÿÿÿ8×ýçÒ¤,
