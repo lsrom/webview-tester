@@ -1,12 +1,23 @@
 package cz.lsrom.webviewtest;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -15,7 +26,12 @@ import butterknife.OnClick;
 /**
  * @author Lukas Srom <lukas.srom@gmail.com>
  */
-public class SettingsFragment extends Fragment implements FragmentLifecycle {
+public class SettingsFragment extends Fragment implements FragmentLifecycle, ILogSender {
+    private static final String TAG = SettingsFragment.class.getSimpleName();
+
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    private static final String LOG_FILE_NAME = "%s-logs.txt";
+
     @BindView(R.id.url)
     EditText url;
 
@@ -43,6 +59,11 @@ public class SettingsFragment extends Fragment implements FragmentLifecycle {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_log, container, false);
         ButterKnife.bind(this, view);
+
+        String stringUrl = ((MainActivity)getActivity()).getUrl();
+        if (stringUrl != null){
+            url.setText(stringUrl);
+        }
 
         return view;
     }
@@ -76,5 +97,38 @@ public class SettingsFragment extends Fragment implements FragmentLifecycle {
         // no web view in this fragment
     }
 
+    @Override
+    public void sendLogs() {
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.mail_subject));
+        i.putExtra(Intent.EXTRA_TEXT   , getString(R.string.mail_body));
+        try {
+            i.putExtra(Intent.EXTRA_STREAM, logsToFile());
+        } catch (IOException e) {
+            Log.e(TAG, "Can't create file with logs: " + e.getMessage());
+        }
+        try {
+            startActivity(Intent.createChooser(i, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Log.d(TAG, "Can't create chooser for email: " + ex.getMessage());
+        }
+    }
 
+    private Uri logsToFile () throws IOException {
+        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
+                String.format(LOG_FILE_NAME, sdf.format(new Date())));
+
+        if (!file.exists()){
+            file.createNewFile();
+        }
+        FileOutputStream outputStreamWriter = new FileOutputStream(file);
+        try {
+            outputStreamWriter.write(logString.getBytes("UTF-8"));
+        } catch (IOException e) {
+            Log.e(TAG, "UTF-8 is unsupported encoding.");
+        }
+        outputStreamWriter.close();
+        return Uri.fromFile(file);
+    }
 }
