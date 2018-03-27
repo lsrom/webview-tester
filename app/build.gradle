@@ -62,7 +62,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     // https://github.com/dm77/barcodescanner
-    compile 'me.dm7.barcodescanner:zxing:1.9.3'
+    implementation 'me.dm7.barcodescanner:zxing:1.9.3'
 
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support:design:27.1.0'
