@@ -3,8 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/mainSettings"
-        android:title="Reload"
+        android:id="@+id/action_bar_reload"
+        android:title="@string/action_bar.btn_add"
+        android:orderInCategory="90"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_bar_more"
+        android:icon="@drawable/ic_more_vert_white_24dp"
         android:orderInCategory="100"
         app:showAsAction="always" />
 
