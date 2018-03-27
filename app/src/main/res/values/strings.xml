@@ -4,7 +4,10 @@
     <string name="tab.settings">Settings/Logs</string>
     <string name="tab.webview">Web View</string>
     <string name="general.clear_log">Clear Log</string>
-    <string name="action_bar.btn_add">New URL</string>
+    <string name="action_bar.btn_add">QR URL</string>
     <string name="action_bar.btn_realod">Reload</string>
     <string name="action_bar.more.btn_send_logs">Send logs</string>
+
+    <string name="mail.subject">WebView logs</string>
+    <string name="mail.body">Please see collected logs in the attachment.</string>
 </resources>
