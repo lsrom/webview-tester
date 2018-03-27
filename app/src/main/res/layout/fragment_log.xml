@@ -50,7 +50,8 @@
             android:id="@+id/logs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/navigationBarColor"/>
+            android:textColor="@color/navigationBarColor"
+            android:textIsSelectable="true"/>
 
     </ScrollView>
 
