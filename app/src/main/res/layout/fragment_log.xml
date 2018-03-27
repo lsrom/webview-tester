@@ -42,6 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/log_area_margin"
+        android:layout_marginBottom="@dimen/log_area_margin_bottom"
         app:layout_constraintTop_toBottomOf="@id/ok_btn"
         app:layout_constraintRight_toRightOf="parent">
 

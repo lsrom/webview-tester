@@ -1,5 +1,8 @@
 package cz.lsrom.webviewtest;
 
+import android.graphics.Bitmap;
+import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -7,7 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.ConsoleMessage;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -22,7 +29,7 @@ import butterknife.Unbinder;
 /**
  * @author Lukas Srom <lukas.srom@gmail.com>
  */
-public class WebViewFragment extends Fragment implements MainActivity.FragmentLifecycle {
+public class WebViewFragment extends Fragment implements FragmentLifecycle {
     private static final String TAG = WebViewFragment.class.getSimpleName();
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSS", Locale.getDefault());
@@ -53,9 +60,11 @@ public class WebViewFragment extends Fragment implements MainActivity.FragmentLi
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.getSettings().setAllowContentAccess(true);
-        webView.getSettings().setAllowFileAccessFromFileURLs(true);
-        webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
         webView.getSettings().setSupportMultipleWindows(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            webView.getSettings().setAllowFileAccessFromFileURLs(true);
+            webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+        }
 
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -81,7 +90,48 @@ public class WebViewFragment extends Fragment implements MainActivity.FragmentLi
                 view.loadUrl(url);
                 return true;
             }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                super.onReceivedError(view, request, error);
+                Log.d(TAG, "Received error.");
+            }
+
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                super.onReceivedSslError(view, handler, error);
+                Log.d(TAG, "SSL error: " + error.getUrl() + ": " + error.toString());
+            }
+
+            @Override
+            public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
+                super.onReceivedHttpError(view, request, errorResponse);
+                Log.d(TAG, "HTTP error: " + errorResponse.getReasonPhrase());
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                Log.d(TAG, "onPageStarted: " + url);
+                showProgressDialog(url);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                Log.d(TAG, "onPageFinished: " + url);
+                hideProgressDialog();
+            }
+
+            @Override
+            public void onLoadResource(WebView view, String url) {
+                super.onLoadResource(view, url);
+                Log.d(TAG, "onLoadResource: " + url);
+            }
         });
+
+        SettingsFragment.addLog(webView.getSettings().getUserAgentString());
+
         return view;
     }
 
@@ -99,5 +149,13 @@ public class WebViewFragment extends Fragment implements MainActivity.FragmentLi
     public void reloadWebView() {
         Log.d(TAG, "Loading URL: " + SettingsFragment.getUrl());
         webView.loadUrl(SettingsFragment.getUrl());
+    }
+
+    private void showProgressDialog (String url){
+        // todo
+    }
+
+    private void hideProgressDialog (){
+        // todo
     }
 }

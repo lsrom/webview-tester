@@ -23,13 +23,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
-    public interface FragmentLifecycle {
-        void onResumeFragment();
-
-        void reloadWebView ();
-    }
-
+public class MainActivity extends AppCompatActivity implements ITabChanger {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -71,6 +65,15 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void showWebViewTab() {
+        TabLayout.Tab tab = tabLayout.getTabAt(1);
+        if (tab == null){
+            return;
+        }
+        tab.select();
+    }
+
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new SettingsFragment(), getString(R.string.tab_settings));
@@ -86,17 +89,22 @@ public class MainActivity extends AppCompatActivity {
                 fragmentToShow.onResumeFragment();
 
                 if (fragmentToShow instanceof WebViewFragment){
-                    View view = getCurrentFocus();
-                    if (view != null) {
-                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                    }
+                    hideKeyboard();
+                    fragmentToShow.reloadWebView();
                 }
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {}
         });
+    }
+
+    private void hideKeyboard (){
+        View view = getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

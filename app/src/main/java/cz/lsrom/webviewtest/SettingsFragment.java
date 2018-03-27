@@ -2,7 +2,6 @@ package cz.lsrom.webviewtest;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import butterknife.OnClick;
 /**
  * @author Lukas Srom <lukas.srom@gmail.com>
  */
-public class SettingsFragment extends Fragment implements MainActivity.FragmentLifecycle {
+public class SettingsFragment extends Fragment implements FragmentLifecycle {
     @BindView(R.id.url)
     EditText url;
 
@@ -39,27 +38,23 @@ public class SettingsFragment extends Fragment implements MainActivity.FragmentL
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_log, container, false);
         ButterKnife.bind(this, view);
-        return view;
-    }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+        return view;
     }
 
     @OnClick(R.id.ok_btn)
     public void clickOkBtn (){
         urlString = url.getText().toString().trim();
+        ITabChanger tabChanger = ((ITabChanger)getActivity());
+        if (tabChanger == null){
+            return;
+        }
+        tabChanger.showWebViewTab();
     }
 
     @OnClick(R.id.clear_btn)
@@ -70,6 +65,9 @@ public class SettingsFragment extends Fragment implements MainActivity.FragmentL
 
     @Override
     public void onResumeFragment() {
+        if (logs == null){
+            return;
+        }
         logs.setText(logString);
     }
 
