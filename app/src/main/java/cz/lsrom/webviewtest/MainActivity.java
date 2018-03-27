@@ -8,7 +8,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements ITabChanger {
     ViewPager viewPager;
 
     private ViewPagerAdapter adapter;
+    private MenuItem menuBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +57,45 @@ public class MainActivity extends AppCompatActivity implements ITabChanger {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
+        menuBtn = menu.getItem(0);
 
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        FragmentLifecycle fragmentToShow = (FragmentLifecycle)adapter.getItem(viewPager.getCurrentItem());
-        fragmentToShow.reloadWebView();
+        switch (item.getItemId()){
+            case R.id.action_bar_more:
+                View menuItemView = findViewById(R.id.action_bar_more);
+                final PopupMenu popupMenu = new PopupMenu(this, menuItemView);
+                popupMenu.inflate(R.menu.popup_menu);
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        switch (item.getItemId()) {
+                            case R.id.action_bar_more_send:
+                                Log.d("demo", "send");
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show();
+                break;
+            case R.id.action_bar_reload:
+                if (menuBtn == null){
+                    break;
+                }
+                if (menuBtn.getTitle().equals(getString(R.string.action_bar_btn_add))){
+                    // todo
+                } else {
+                    FragmentLifecycle fragmentToShow = (FragmentLifecycle)adapter.getItem(viewPager.getCurrentItem());
+                    fragmentToShow.reloadWebView();
+                }
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -91,6 +125,13 @@ public class MainActivity extends AppCompatActivity implements ITabChanger {
                 if (fragmentToShow instanceof WebViewFragment){
                     hideKeyboard();
                     fragmentToShow.reloadWebView();
+                    if (menuBtn != null){
+                        menuBtn.setTitle(R.string.action_bar_btn_realod);
+                    }
+                } else {
+                    if (menuBtn != null){
+                        menuBtn.setTitle(R.string.action_bar_btn_add);
+                    }
                 }
             }
 
