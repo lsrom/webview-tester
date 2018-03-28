@@ -12,7 +12,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/ok_btn"
-        android:inputType="textUri"/>
+        android:inputType="textUri"
+        android:text="@string/tab.settings.url_hint"/>
 
     <Button
         android:id="@+id/clear_btn"
