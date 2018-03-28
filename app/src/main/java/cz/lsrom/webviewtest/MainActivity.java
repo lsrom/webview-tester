@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements ITabChanger {
                                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                     PERMISSION_TAG_MAIL);
                         } else {
-                            ILogSender sender = (ILogSender) adapter.getItem(viewPager.getCurrentItem());
+                            ILogSender sender = (ILogSender) adapter.getItem(0);
                             sender.sendLogs();
                         }
 
