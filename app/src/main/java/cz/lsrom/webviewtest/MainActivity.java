@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements ITabChanger {
         switch (requestCode){
             case PERMISSION_TAG_MAIL:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    ILogSender sender = (ILogSender) adapter.getItem(viewPager.getCurrentItem());
+                    ILogSender sender = (ILogSender) adapter.getItem(0);
                     sender.sendLogs();
                 }
                 break;
