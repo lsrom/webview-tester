@@ -100,7 +100,11 @@ public class WebViewFragment extends Fragment implements FragmentLifecycle {
             @Override
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
                 super.onReceivedSslError(view, handler, error);
-                Log.d(TAG, "SSL error: " + error.getUrl() + ": " + error.toString());
+
+                // show ssl error and proceed
+                SettingsFragment.addLog("SSL error: " + error.getUrl() + ": " + error.toString());
+                SettingsFragment.addLog("!!!Proceeding to load the page despite insecure content!!!");
+                handler.proceed();
             }
 
             @Override
