@@ -68,6 +68,8 @@ public class SettingsFragment extends Fragment implements FragmentLifecycle, ILo
             url.setText(stringUrl);
         }
 
+        url.setSelection(url.getText().length());
+
         return view;
     }
 

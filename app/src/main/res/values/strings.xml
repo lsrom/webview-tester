@@ -10,4 +10,6 @@
 
     <string name="mail.subject">WebView logs</string>
     <string name="mail.body">Please see collected logs in the attachment.</string>
+
+    <string name="tab.settings.url_hint">http://</string>
 </resources>
