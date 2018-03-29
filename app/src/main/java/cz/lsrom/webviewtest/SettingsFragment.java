@@ -46,6 +46,9 @@ public class SettingsFragment extends Fragment implements FragmentLifecycle, ILo
     }
 
     public static void addLog (String log){
+        if (log == null){
+            return;
+        }
         logString = log + "\r\n" + logString;
     }
 
