@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.io.File;
@@ -37,6 +39,9 @@ public class SettingsFragment extends Fragment implements FragmentLifecycle, ILo
 
     @BindView(R.id.logs)
     TextView logs;
+
+    @BindView(R.id.ssl_switch)
+    Switch sslSwitch;
 
     private static String urlString = "";
     private static String logString = "";
@@ -69,6 +74,13 @@ public class SettingsFragment extends Fragment implements FragmentLifecycle, ILo
         }
 
         url.setSelection(url.getText().length());
+        sslSwitch.setChecked(SPManager.trustAllSslCerts(getContext()));
+        sslSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SPManager.setTrustAllSslCerts(isChecked, getContext());
+            }
+        });
 
         return view;
     }

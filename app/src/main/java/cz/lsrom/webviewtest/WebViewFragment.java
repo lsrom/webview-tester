@@ -40,7 +40,8 @@ public class WebViewFragment extends Fragment implements FragmentLifecycle {
     @BindView(R.id.webview)
     WebView webView;
 
-    Unbinder unbinder;
+    private Unbinder unbinder;
+    private boolean trustSsl = false;
 
     public WebViewFragment() {
         // Required empty public constructor
@@ -101,8 +102,13 @@ public class WebViewFragment extends Fragment implements FragmentLifecycle {
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
                 // show ssl error and proceed
                 SettingsFragment.addLog("SSL error: " + error.getUrl() + ": " + error.toString());
-                SettingsFragment.addLog("!!!Proceeding to load the page despite insecure content!!!");
-                handler.proceed();
+                if (trustSsl){
+                    handler.proceed();
+                    SettingsFragment.addLog("!!!Proceeding to load the page despite insecure content!!!");
+                } else {
+                    handler.cancel();
+                    SettingsFragment.addLog("Not loading unsecure content. You can change this behavior by flipping the switch above.");
+                }
             }
 
             @Override
@@ -145,6 +151,8 @@ public class WebViewFragment extends Fragment implements FragmentLifecycle {
 
     @Override
     public void onResumeFragment() {
+        trustSsl = SPManager.trustAllSslCerts(getContext());
+        Log.d(TAG, "Trust all SSL certificates set to: " + trustSsl);
     }
 
     @Override

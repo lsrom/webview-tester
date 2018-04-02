@@ -12,4 +12,5 @@
     <string name="mail.body">Please see collected logs in the attachment.</string>
 
     <string name="tab.settings.url_hint">http://</string>
+    <string name="tab.settings.ssl_title">Trust all SSL</string>
 </resources>
