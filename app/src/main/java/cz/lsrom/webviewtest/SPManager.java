@@ -20,10 +20,14 @@ class SPManager {
         SharedPreferences sp = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putBoolean(TRUST_SSL_TAG, trust);
-        editor.commit();
+        editor.apply();
     }
 
-    public static boolean trustAllSslCerts (@NonNull Context context){
+    public static boolean trustAllSslCerts (@Nullable Context context){
+        if (context == null){
+            Log.d(TAG, "Context null. Cannot get trust all SSL certificates.");
+            return false;
+        }
         SharedPreferences sp = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
         return sp.getBoolean(TRUST_SSL_TAG, false);
     }

@@ -76,8 +76,7 @@ public class WebViewFragment extends Fragment implements FragmentLifecycle {
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
-                StringBuilder builder = new StringBuilder();
-                builder
+                StringBuilder builder = new StringBuilder()
                         .append(sdf.format(new Date()))
                         .append(LEFT)
                         .append(consoleMessage.lineNumber())
@@ -166,7 +165,7 @@ public class WebViewFragment extends Fragment implements FragmentLifecycle {
     @Override
     public void reloadWebView() {
         Log.d(TAG, "Loading URL: " + SettingsFragment.getUrl());
-        webView.loadUrl(SettingsFragment.getUrl());
+        if (webView != null) webView.loadUrl(SettingsFragment.getUrl());
     }
 
     private void showProgressDialog (String url){
