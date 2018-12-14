@@ -1,10 +1,10 @@
 package cz.lsrom.webviewtest;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -52,6 +53,7 @@ public class WebViewFragment extends Fragment implements FragmentLifecycle {
         super.onCreate(savedInstanceState);
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -107,14 +109,16 @@ public class WebViewFragment extends Fragment implements FragmentLifecycle {
                     SettingsFragment.addLog("!!!Proceeding to load the page despite insecure content!!!");
                 } else {
                     handler.cancel();
-                    SettingsFragment.addLog("Not loading unsecure content. You can change this behavior by flipping the switch above.");
+                    SettingsFragment.addLog("Not loading insecure content. You can change this behavior by flipping the switch above.");
                 }
             }
 
             @Override
             public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
                 super.onReceivedHttpError(view, request, errorResponse);
-                Log.d(TAG, "HTTP error: " + errorResponse.getReasonPhrase());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Log.d(TAG, "HTTP error: " + errorResponse.getReasonPhrase());
+                }
             }
 
             @Override
