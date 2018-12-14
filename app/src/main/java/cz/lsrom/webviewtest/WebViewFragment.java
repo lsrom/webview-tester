@@ -69,6 +69,10 @@ public class WebViewFragment extends Fragment implements FragmentLifecycle {
             webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
         }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
+
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
