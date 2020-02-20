@@ -23,7 +23,7 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 android {
     defaultConfig {
         applicationId "cz.lsrom.webviewtest"
-        versionCode 10
+        versionCode 201
         versionName "2.0"
         setProperty("archivesBaseName", getAARPackageName())
     }

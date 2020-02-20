@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="@dimen/config_button_min_width"
-            android:text="@string/general_clear_log"
+            android:text="@string/config_clear_log"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/url"
             />
@@ -52,6 +52,7 @@
             android:layout_marginTop="@dimen/config_switch_title_margin"
             android:ellipsize="end"
             android:text="@string/config_trust_ssl_title"
+            android:textAppearance="?textAppearanceBody1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ok_btn"
             />
@@ -72,6 +73,7 @@
             android:layout_marginTop="@dimen/config_switch_title_margin"
             android:ellipsize="end"
             android:text="@string/config_remember_url_title"
+            android:textAppearance="?textAppearanceBody1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ssl_switch"
             />
@@ -91,9 +93,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/config_user_agent_margin"
             android:text="@string/config_user_agent_title"
+            android:textAppearance="?textAppearanceBody1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/url_switch"
+            android:labelFor="@id/user_agent_input"
             />
 
         <EditText
@@ -104,6 +108,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_agent_title"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
             />
 
         <Button
@@ -133,6 +139,7 @@
             android:layout_marginTop="@dimen/config_switch_title_margin"
             android:ellipsize="end"
             android:text="@string/config_user_agent_switch"
+            android:textAppearance="?textAppearanceBody1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/reset_user_agent_button"
             />

@@ -13,6 +13,7 @@
         <item name="colorOnBackground">@color/onBackground</item>
         <item name="colorSurface">@color/surface</item>
         <item name="colorOnSurface">@color/onSurface</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
 
     </style>
 
