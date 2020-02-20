@@ -1,3 +1,7 @@
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+apply from: "$rootDir/buildSrc/android_module.gradle"
+
 buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
@@ -7,41 +11,21 @@ buildscript {
         classpath 'io.fabric.tools:gradle:1+'
     }
 }
-apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
-
 
 def keystorePropertiesFile = rootProject.file("../keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
-    compileSdkVersion 28
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
     defaultConfig {
         applicationId "cz.lsrom.webviewtest"
-        minSdkVersion 14
-        targetSdkVersion 28
-        versionCode 5
-        versionName "1.0.4"
+        versionCode 10
+        versionName "2.0"
         setProperty("archivesBaseName", getAARPackageName())
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-
-    signingConfigs {
-        release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
-        }
     }
 
     buildTypes {
@@ -53,7 +37,6 @@ android {
         release {
             minifyEnabled true
             proguardFiles 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
     }
 }
@@ -61,24 +44,24 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    // ButterKnife - https://github.com/JakeWharton/butterknife
-    implementation 'com.jakewharton:butterknife:9.0.0-rc2'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc2'
+    implementation "android.arch.navigation:navigation-fragment-ktx:$NAVIGATION"
+    implementation "android.arch.navigation:navigation-ui-ktx:$NAVIGATION"
 
-    // https://github.com/dm77/barcodescanner
-    implementation 'me.dm7.barcodescanner:zxing:1.9.3'
+    implementation "androidx.appcompat:appcompat:$APP_COMPAT"
+    implementation "androidx.core:core-ktx:$ANDROIDX_CORE"
+    implementation "androidx.constraintlayout:constraintlayout:$CONSTRAINT_LAYOUT"
+    implementation "com.google.android.material:material:$MATERIAL"
+    implementation "androidx.lifecycle:lifecycle-extensions:$LIFECYCLE"
+    implementation "com.jakewharton.timber:timber:$TIMBER"
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'com.google.android.material:material:1.1.0-alpha02'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+    implementation "me.dm7.barcodescanner:zxing:$QR_SCANNER"
+
 
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
         transitive = true;
     }
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
 def getAARPackageName (){
