@@ -1,0 +1,29 @@
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion ANDROID_COMPILE_SDK
+
+    defaultConfig {
+        minSdkVersion ANDROID_MIN_SDK
+        targetSdkVersion ANDROID_TARGET_SDK
+    }
+
+    sourceSets{
+        main {
+            java.srcDirs = ['src/main/kotlin']
+        }
+
+        test {
+            java.srcDirs = ['src/test/kotlin']
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}

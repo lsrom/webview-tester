@@ -1,16 +1,31 @@
 <resources>
     <string name="app_name">WebView Test</string>
-    <string name="general.ok">OK</string>
-    <string name="tab.settings">Settings/Logs</string>
-    <string name="tab.webview">Web View</string>
-    <string name="general.clear_log">Clear Log</string>
-    <string name="action_bar.btn_add">QR URL</string>
-    <string name="action_bar.btn_realod">Reload</string>
-    <string name="action_bar.more.btn_send_logs">Send logs</string>
+    <string name="tab_config_title">Config</string>
+    <string name="tab_logs_title">Logs</string>
+    <string name="tab_webview_title">Web View</string>
+    <string name="general_clear_log">Clear Log</string>
 
-    <string name="mail.subject">WebView logs</string>
-    <string name="mail.body">Please see collected logs in the attachment.</string>
+    <string name="share">Share</string>
+    <string name="log_view_menu_share">Share logs</string>
+    <string name="log_view_menu_search">Search logs</string>
+    <string name="share_logs_subject">WebView logs</string>
+    <string name="share_logs_message">Please see collected logs in the attachment.</string>
+    <string name="webview_refresh">Refresh</string>
+    <string name="config_url_hint">URL</string>
+    <string name="config_qrcode">Scan QR</string>
+    <string name="webview_empty">No URL loaded</string>
 
-    <string name="tab.settings.url_hint">http://</string>
-    <string name="tab.settings.ssl_title">Trust all SSL</string>
+    <string name="config_load_url">Load</string>
+    <string name="config_default_url">http://</string>
+    <string name="config_trust_ssl_title">Trust all SSL</string>
+    <string name="config_remember_url_title">Remember URL</string>
+
+    <string name="config_user_agent_title">Custom User-Agent</string>
+    <string name="config_user_agent_save">Save</string>
+    <string name="config_user_agent_reset">Reset</string>
+    <string name="config_user_agent_switch">Overwrite default</string>
+    <string name="config_user_agent_empty_message">No custom User-Agent is saved and no WebView instance has been created to extract current User-Agent.</string>
+    <string name="permission_denied_request_permission_button">Request Permission</string>
+    <string name="permission_denied_message">Camera permission is required for loading URL from QR code.</string>
+
 </resources>

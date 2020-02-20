@@ -3,27 +3,40 @@
     package="cz.lsrom.webviewtest">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".app.App"
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
-        android:theme="@style/MyMaterialTheme">
-        <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait">
+        android:theme="@style/Theme.WebView.Tester">
+
+        <activity android:name=".app.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QrScannerActivity" />
+
+        <activity android:name=".qr.ui.QrScannerActivity" />
+
+        <provider
+            android:name=".logs.platform.LogFileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+
+        </provider>
 
         <meta-data
             android:name="io.fabric.ApiKey"

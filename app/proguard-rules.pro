@@ -1,5 +1,6 @@
 -dontwarn android.support.**
 
+-ignorewarning
 -dontoptimize
 -optimizations !code/simplification/arithmetic
 -keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod

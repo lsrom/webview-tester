@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/config_view_menu_qrcode"
+        android:icon="@drawable/qrcode_icon"
+        android:title="@string/config_qrcode"
+        app:showAsAction="always" />
+
+</menu>

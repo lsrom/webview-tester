@@ -6,10 +6,10 @@
     <color name="windowBackground">@color/white</color>
     <color name="colorAccent">#c8e8ff</color>
 
-    <color name="background">@color/white</color>
-    <color name="onBackground">@color/black</color>
-    <color name="surface">@color/white</color>
-    <color name="onSurface">@color/black</color>
+    <color name="background">@color/black</color>
+    <color name="onBackground">@color/white</color>
+    <color name="surface">@color/black</color>
+    <color name="onSurface">@color/white</color>
 
     <color name="white">#fff</color>
     <color name="black">#000</color>

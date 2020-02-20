@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/config_padding"
+        android:paddingEnd="@dimen/config_padding"
+        >
+
+        <EditText
+            android:id="@+id/url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/config_url_hint"
+            android:importantForAutofill="no"
+            android:inputType="textUri"
+            android:text="@string/config_default_url"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/ok_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <Button
+            android:id="@+id/clear_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="@dimen/config_button_min_width"
+            android:text="@string/general_clear_log"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/url"
+            />
+
+        <Button
+            android:id="@+id/ok_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="@dimen/config_button_min_width"
+            android:text="@string/config_load_url"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/url"
+            />
+
+        <TextView
+            android:id="@+id/trust_unsecure_ssl_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/config_switch_title_margin"
+            android:ellipsize="end"
+            android:text="@string/config_trust_ssl_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ok_btn"
+            />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/ssl_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/config_switch_margin"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ok_btn"
+            />
+
+        <TextView
+            android:id="@+id/remember_url_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/config_switch_title_margin"
+            android:ellipsize="end"
+            android:text="@string/config_remember_url_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ssl_switch"
+            />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/url_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/config_switch_margin"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ssl_switch"
+            />
+
+        <TextView
+            android:id="@+id/user_agent_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/config_user_agent_margin"
+            android:text="@string/config_user_agent_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/url_switch"
+            />
+
+        <EditText
+            android:id="@+id/user_agent_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?textAppearanceBody2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_agent_title"
+            />
+
+        <Button
+            android:id="@+id/reset_user_agent_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="@dimen/config_button_min_width"
+            android:text="@string/config_user_agent_reset"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_agent_input"
+            />
+
+        <Button
+            android:id="@+id/save_user_agent_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="@dimen/config_button_min_width"
+            android:text="@string/config_user_agent_save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_agent_input"
+            />
+
+        <TextView
+            android:id="@+id/user_agent_switch_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/config_switch_title_margin"
+            android:ellipsize="end"
+            android:text="@string/config_user_agent_switch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/reset_user_agent_button"
+            />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/user_agent_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/config_switch_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/save_user_agent_button"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
