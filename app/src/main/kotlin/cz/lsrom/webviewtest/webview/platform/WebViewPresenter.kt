@@ -8,6 +8,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.net.http.SslError
+import android.os.Build
 import android.view.View
 import android.webkit.*
 import androidx.lifecycle.ViewModel
@@ -42,11 +43,15 @@ internal class WebViewPresenter : ViewModel() {
         javaScriptCanOpenWindowsAutomatically = true
         allowContentAccess = true
         supportMultipleWindows()
-        allowFileAccessFromFileURLs = true
-        allowUniversalAccessFromFileURLs = true
-        WebView.setWebContentsDebuggingEnabled(true)
         domStorageEnabled = true
         databaseEnabled = true
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            allowFileAccessFromFileURLs = true
+            allowUniversalAccessFromFileURLs = true
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WebView.setWebContentsDebuggingEnabled(true)
+        }
     }
 
     fun setChromeClient(webView: WebView, logPresenter: LogPresenter) {
