@@ -47,12 +47,11 @@ internal class LogView : BaseTabView() {
         (menu.findItem(R.id.log_view_menu_search).actionView as SearchView).let { searchView ->
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    Timber.d("Query: $query")
+                    hideKeyboard()
                     return true
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    Timber.d("New text: $newText")
                     newText?.let { logs.text = presenter.filterLogsToText(it) }
                     return true
                 }
