@@ -10,6 +10,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import cz.lsrom.webviewtest.R
 import cz.lsrom.webviewtest.config.platform.ConfigPresenter
 import cz.lsrom.webviewtest.logs.platform.LogPresenter
@@ -43,6 +46,9 @@ internal class ConfigView : BaseTabView() {
         bindListeners()
 
         url.setText(presenter.getDefaultUrl(view.context))
+        user_agent_input.doOnTextChanged { text, _, _, _ ->
+            validateUserAgent(text.toString())
+        }
     }
 
     override fun onResume() {
@@ -66,14 +72,14 @@ internal class ConfigView : BaseTabView() {
 
     override fun tabTitle(context: Context) = context.getString(R.string.tab_config_title)
 
-    private fun hideKeyboard() {
-        requireActivity()
-            .currentFocus
-            ?.let {
-                (requireActivity()
-                    .getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager)
-                    .hideSoftInputFromWindow(view?.windowToken, 0)
-            }
+    private fun validateUserAgent(value: String){
+        if (value.contains("\n")){
+            save_user_agent_button.isEnabled = false
+            user_agent_input_invalid_message.isVisible = true
+        } else {
+            save_user_agent_button.isEnabled = true
+            user_agent_input_invalid_message.isVisible = false
+        }
     }
 
     private fun bindListeners() {

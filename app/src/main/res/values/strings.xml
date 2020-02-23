@@ -26,6 +26,7 @@
     <string name="config_user_agent_reset">Reset</string>
     <string name="config_user_agent_switch">Overwrite default</string>
     <string name="config_user_agent_empty_message">No custom User-Agent is saved and no WebView instance has been created to extract current User-Agent.</string>
+    <string name="config_user_agent_invalid_message">END OD LINE characters not allowed.</string>
 
     <string name="permission_denied_request_permission_button">Request Permission</string>
     <string name="permission_denied_message">Camera permission is required for loading URL from QR code.</string>
