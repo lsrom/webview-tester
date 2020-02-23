@@ -23,7 +23,7 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 android {
     defaultConfig {
         applicationId "cz.lsrom.webviewtest"
-        versionCode 204
+        versionCode 205
         versionName "2.0"
         setProperty("archivesBaseName", getAARPackageName())
         vectorDrawables.useSupportLibrary = true
