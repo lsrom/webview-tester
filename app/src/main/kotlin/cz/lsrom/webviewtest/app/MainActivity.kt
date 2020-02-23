@@ -6,7 +6,11 @@ package cz.lsrom.webviewtest.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import cz.lsrom.webviewtest.R
+import cz.lsrom.webviewtest.config.platform.ConfigPresenter
+import cz.lsrom.webviewtest.qr.ui.URL_EXTRA
+import cz.lsrom.webviewtest.webview.platform.WebViewPresenter
 
 internal class MainActivity: AppCompatActivity() {
 
@@ -15,5 +19,11 @@ internal class MainActivity: AppCompatActivity() {
         setContentView(R.layout.main_activity)
 
         supportActionBar?.setDefaultDisplayHomeAsUpEnabled(true)
+
+        if (intent != null && intent.hasExtra(URL_EXTRA)){
+            intent?.getStringExtra(URL_EXTRA)?.let {
+                ViewModelProvider(this).get(ConfigPresenter::class.java).setCurrentUrl(it)
+            }
+        }
     }
 }

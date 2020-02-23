@@ -9,12 +9,14 @@ import androidx.lifecycle.ViewModel
 import cz.lsrom.webviewtest.R
 import cz.lsrom.webviewtest.config.data.CustomUserAgentRepository
 import cz.lsrom.webviewtest.config.data.RememberUrlRepository
+import cz.lsrom.webviewtest.config.data.RememberUrlRepository.getUrl
 import cz.lsrom.webviewtest.config.data.TrustSslRepository
 
 internal class ConfigPresenter : ViewModel() {
 
     private var webViewAction: () -> Unit = { Unit }
     private var currentUserAgent: String? = null
+    private var currentUrl: String? = null
 
     fun currentUserAgent(value: String) {
         currentUserAgent = value
@@ -68,13 +70,19 @@ internal class ConfigPresenter : ViewModel() {
         RememberUrlRepository.setUrl(value, context)
     }
 
+    fun setCurrentUrl(url: String){
+        currentUrl = url
+    }
+
     fun getDefaultUrl(context: Context): String {
-        return if (RememberUrlRepository.isRememberUrl(context)) {
-            RememberUrlRepository
-                .getUrl(context)
-                ?: context.getString(R.string.config_default_url)
-        } else {
-            context.getString(R.string.config_default_url)
+        return when {
+            currentUrl != null -> currentUrl!!
+            isRememberUrl(context) -> getUrl(context) ?: defaultString(context)
+            else -> defaultString(context)
         }
+    }
+
+    private fun defaultString(context: Context): String {
+        return context.getString(R.string.config_default_url)
     }
 }
