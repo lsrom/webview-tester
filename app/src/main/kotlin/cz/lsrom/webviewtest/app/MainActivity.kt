@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import cz.lsrom.webviewtest.R
 import cz.lsrom.webviewtest.config.platform.ConfigPresenter
 import cz.lsrom.webviewtest.qr.ui.URL_EXTRA
-import cz.lsrom.webviewtest.webview.platform.WebViewPresenter
 
 internal class MainActivity: AppCompatActivity() {
 

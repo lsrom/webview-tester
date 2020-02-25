@@ -73,10 +73,7 @@ internal class WebViewPresenter : ViewModel() {
         loading: View
     ) {
         webView.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView, url: String?): Boolean {
-                view.loadUrl(url)
-                return true
-            }
+            override fun shouldOverrideUrlLoading(view: WebView, url: String?) = false
 
             override fun onReceivedError(
                 view: WebView?,
