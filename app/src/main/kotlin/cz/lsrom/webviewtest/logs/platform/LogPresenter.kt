@@ -1,7 +1,3 @@
-/*
- * Copyright © 2019, Oracle and/or its affiliates. All rights reserved.
- */
-
 package cz.lsrom.webviewtest.logs.platform
 
 import android.content.Context
