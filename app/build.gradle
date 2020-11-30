@@ -1,14 +1,17 @@
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 apply from: "$rootDir/buildSrc/android_module.gradle"
 
 buildscript {
     repositories {
-        maven { url 'https://maven.fabric.io/public' }
+        google()
+        jcenter()
     }
 
     dependencies {
-        classpath 'io.fabric.tools:gradle:1+'
+        classpath 'com.google.gms:google-services:4.3.4'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
     }
 }
 
@@ -23,8 +26,8 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 android {
     defaultConfig {
         applicationId "cz.lsrom.webviewtest"
-        versionCode 206
-        versionName "2.1"
+        versionCode 207
+        versionName "2.2"
         setProperty("archivesBaseName", getAARPackageName())
         vectorDrawables.useSupportLibrary = true
     }
@@ -57,12 +60,10 @@ dependencies {
 
     implementation "me.dm7.barcodescanner:zxing:$QR_SCANNER"
 
+    implementation "com.google.firebase:firebase-crashlytics:$FIREBASE_CRASHLYTICS"
+    implementation "com.google.firebase:firebase-analytics:$FIREBASE_ANALYTICS"
 
-    implementation('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
-        transitive = true;
-    }
-
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
 }
 
 def getAARPackageName (){

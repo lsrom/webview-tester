@@ -1,19 +1,20 @@
 package cz.lsrom.webviewtest.app
 
 import android.app.Application
-import com.crashlytics.android.Crashlytics
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import cz.lsrom.webviewtest.BuildConfig
-import io.fabric.sdk.android.Fabric
 import timber.log.Timber
 
-internal class App: Application() {
+internal class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
-        Fabric.with(applicationContext, Crashlytics())
+        FirebaseCrashlytics
+            .getInstance()
+            .setCrashlyticsCollectionEnabled(BuildConfig.DEBUG.not())
 
-        if (BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
     }
